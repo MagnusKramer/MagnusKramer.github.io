@@ -64,8 +64,11 @@ let myMapScale = L.control.scale({
 
 L.marker([47.264,11.385], {
     title: "Uni Innsbruck",
-    opacity: true;
+    opacity: 0.4,
+    draggable: true;
 }).addTo(myMap);
+
+myMap.setView([47.264, 11.385], 16);
 
 myMap.addControl(myMapControl); // http://leafletjs.com/reference-1.3.0.html#map-addcontrol
 
