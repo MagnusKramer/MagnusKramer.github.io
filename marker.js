@@ -79,6 +79,6 @@ const markerOptions = {
 L.marker(uni, markerOptions).addTo(markerGroup);
 L.marker(usi, markerOptions).addTo(markerGroup);
 L.marker(technik, markerOptions).addTo(markerGroup);
-L.marker(patscherkofel, markerOptions).addTo(markerGroup);
+L.marker(patscherkofel, markerOptions).bindPopup("<p>Der schöne Patschi</p><img style='width:200px' style='height:200px' src='https://pixabay.com/get/eb34b20b2ffd053ed1534705fb0938c9bd22ffd41cb3154792f2c77ba1/igls-2134794_1920.jpg' alt='Patscher' />").openPopup().addTo(markerGroup);
 L.marker(igls, markerOptions).addTo(markerGroup);
 myMap.fitBounds(markerGroup.getBounds());
