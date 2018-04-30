@@ -43,13 +43,13 @@ let myLayers = {
 myMap.addLayer(myLayers.geolandbasemap);    // http://leafletjs.com/reference-1.3.0.html#layergroup-addlayer
 myMap.addLayer(markerGroup)
 let myMapControl = L.control.layers({   // http://leafletjs.com/reference-1.3.0.html#control-layers-l-control-layers
-    "Openstreetmap" : myLayers.osm,
+    //"Openstreetmap" : myLayers.osm,
     "basemap.at Grundkarte" : myLayers.geolandbasemap,
-    "basemap.at grau" : myLayers.bmapgrau,
-    "basemap.at highdpi" : myLayers.bmaphidpi,
+    //"basemap.at grau" : myLayers.bmapgrau,
+    //"basemap.at highdpi" : myLayers.bmaphidpi,
     "basemap.at Orthofoto" : myLayers.bmaporthofoto30cm,
 },{
-    "basemap.at Overlay" : myLayers.bmapoverlay,
+    //"basemap.at Overlay" : myLayers.bmapoverlay,
     "Marker": markerGroup,
 
 },{
@@ -69,6 +69,7 @@ const usi = [47.257, 11.356];
 const technik = [47.263, 11.343];
 const patscherkofel = [47.208, 11.460];
 const igls = [47.230, 11.408];
+const hafelekar = [47.312, 11.383]
 
 myMap.addLayer(markerGroup);
 const markerOptions = {
@@ -76,9 +77,16 @@ const markerOptions = {
     opacity: 0.7,
     draggable: true,
 };
-L.marker(uni, markerOptions).addTo(markerGroup);
-L.marker(usi, markerOptions).addTo(markerGroup);
-L.marker(technik, markerOptions).addTo(markerGroup);
-L.marker(patscherkofel, markerOptions).bindPopup("<p>Der schöne Patschi</p><img style='width:200px' style='height:200px' src='https://pixabay.com/get/eb34b20b2ffd053ed1534705fb0938c9bd22ffd41cb3154792f2c77ba1/igls-2134794_1920.jpg' alt='Patscher' />").openPopup().addTo(markerGroup);
-L.marker(igls, markerOptions).addTo(markerGroup);
+
+
+//L.marker(uni, markerOptions).addTo(markerGroup);
+//L.marker(usi, markerOptions).addTo(markerGroup);
+//L.marker(technik, markerOptions).addTo(markerGroup);
+//L.marker(patscherkofel, markerOptions).bindPopup("<p>Der schöne Patschi</p><img style='width:200px' style='height:200px' src='https://pixabay.com/get/eb34b20b2ffd053ed1534705fb0938c9bd22ffd41cb3154792f2c77ba1/igls-2134794_1920.jpg' alt='Patscher' />").openPopup().addTo(markerGroup);
+//L.marker(igls, markerOptions).addTo(markerGroup);
+
+
+L.marker(hafelekar, markerOptions).bindPopup("<h4>Station Hafelekar</h4> <p>Temperatur = 1,6°C, Messdatum: 2018-04-26 08:10:00").openPopup().addTo(markerGroup);
+
+
 myMap.fitBounds(markerGroup.getBounds());
