@@ -69,9 +69,9 @@ const usi = [47.257, 11.356];
 const technik = [47.263, 11.343];
 const patscherkofel = [47.208, 11.460];
 const igls = [47.230, 11.408];
-const hafelekar = [47.312, 11.383]
-const nassereitherAlm =[47.344, 10.850]
-
+const hafelekar = [47.312, 11.383];
+const nassereitherAlm =[47.344, 10.850];
+const roterSchroffen = [47.040, 10.718];
 
 myMap.addLayer(markerGroup);
 const markerOptions = {
@@ -90,7 +90,8 @@ const markerOptions = {
 
 L.marker(hafelekar, markerOptions).bindPopup("<h4>Station Hafelekar</h4> <p>Temperatur = 1,6°C </p> <p> Messdatum: 2018-04-26 10:10:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png' alt='Hafelekar' />").openPopup().addTo(markerGroup);
 
-L.marker(nassereitherAlm, markerOptions).bindPopup("<h4>Station Nassereither Alm</h4> <p>Temperatur = 4°C </p> <p> Messdatum: 2018-04-26 10:00:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/nassereith.png' alt='Hafelekar' />").openPopup().addTo(markerGroup);
+L.marker(nassereitherAlm, markerOptions).bindPopup("<h4>Station Nassereither Alm</h4> <p>Temperatur = 4°C </p> <p> Messdatum: 2018-04-26 10:00:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/nassereith.png' alt='Nassereither Alm' />").openPopup().addTo(markerGroup);
 
+L.marker(roterSchroffen, markerOptions).bindPopup("<h4>Station Roter Schroffen Alm</h4> <p>Temperatur = -1°C </p> <p> Messdatum: 2018-04-26 10:00:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/falkaunsalpe.png' alt='Roter Schroffen' />").openPopup().addTo(markerGroup);
 
 myMap.fitBounds(markerGroup.getBounds());
