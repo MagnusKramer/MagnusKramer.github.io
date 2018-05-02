@@ -70,6 +70,8 @@ const technik = [47.263, 11.343];
 const patscherkofel = [47.208, 11.460];
 const igls = [47.230, 11.408];
 const hafelekar = [47.312, 11.383]
+const nassereitherAlm =[47.344, 10.850]
+
 
 myMap.addLayer(markerGroup);
 const markerOptions = {
@@ -86,7 +88,9 @@ const markerOptions = {
 //L.marker(igls, markerOptions).addTo(markerGroup);
 
 
-L.marker(hafelekar, markerOptions).bindPopup("<h4>Station Hafelekar</h4> <p>Temperatur = 1,6°C </p> <p> Messdatum: 2018-04-26 08:10:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png' alt='Hafelekar' />").openPopup().addTo(markerGroup);
+L.marker(hafelekar, markerOptions).bindPopup("<h4>Station Hafelekar</h4> <p>Temperatur = 1,6°C </p> <p> Messdatum: 2018-04-26 10:10:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png' alt='Hafelekar' />").openPopup().addTo(markerGroup);
+
+L.marker(hafelekar, markerOptions).bindPopup("<h4>Station Nassereither Alm</h4> <p>Temperatur = 4°C </p> <p> Messdatum: 2018-04-26 10:00:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png' alt='Hafelekar' />").openPopup().addTo(markerGroup);
 
 
 myMap.fitBounds(markerGroup.getBounds());
