@@ -2,6 +2,9 @@
 
 let myMap = L.map("mapdiv");
 const wienGroup = L.featureGroup().addTo(myMap);
+var myIcon = L.icon({
+    iconUrl: 'skilifting.png',
+});
 let myLayers = {
     
     openstreetmap : L.tileLayer (
@@ -59,14 +62,30 @@ let myMapControl = L.control.layers({
 myMap.addControl(myMapControl)
 myMap.setView([47.267,11.383], 11);
 
-console.log("Stationen: ", wienstation);
 
-let geojson = L.geoJSON(wienstation).addTo(wienGroup);
-geojson.bindPopup(function(layer){
-    const props = layer.feature.properties
-    const popupText = `<h1>${props.NAME}</h1>
-    <p>Adresse: ${props.ADRESSE}</p>`;
-    return popupText;
-});
+async function addGeojson(url){
+    console.log("URL wird geladen:", url);
+    const response = await fetch(url);
+    console.log("Response:", response);
+    const wienjson = await response.json();
+    console.log("GeoJSON:",wienjson);
+    const geojson = L.geoJSON(wienjson, {
+        style: function(feature){
+            return {color: "#ff8452"};
+        },
+        pointToLayer: function(geoJSONPoint, latlng){
+            return L.marker(latlng, {icon: myIcon});
+        }
+    });
+    wienGroup.addLayer(geojson);
+    myMap.fitBounds(wienGroup.getBounds())
+}
 
-myMap.fitBounds(wienGroup.getBounds());
+
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&srsName=EPSG:4326&outputFormat=json&typeName=ogdwien:SPAZIERPUNKTOGD,ogdwien:SPAZIERLINIEOGD"
+
+addGeojson(url);
+myMap.addLayer(wienGroup);
+
+;
+
