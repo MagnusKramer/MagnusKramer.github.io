@@ -86,7 +86,7 @@ const markerOptions = {
 //L.marker(igls, markerOptions).addTo(markerGroup);
 
 
-L.marker(hafelekar, markerOptions).bindPopup("<h4>Station Hafelekar</h4> <p>Temperatur = 1,6°C, Messdatum: 2018-04-26 08:10:00").openPopup().addTo(markerGroup);
+L.marker(hafelekar, markerOptions).bindPopup("<h4>Station Hafelekar</h4> <p>Temperatur = 1,6°C </p> <p> Messdatum: 2018-04-26 08:10:00</p> <img style='width:200px' style='height:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png' alt='Hafelekar' />").openPopup().addTo(markerGroup);
 
 
 myMap.fitBounds(markerGroup.getBounds());
