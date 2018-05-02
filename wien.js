@@ -1,7 +1,7 @@
 
 
 let myMap = L.map("mapdiv");
-const awsGroup = L.featureGroup();
+const wienGroup = L.featureGroup().addTo(myMap);
 let myLayers = {
     
     openstreetmap : L.tileLayer (
@@ -53,20 +53,20 @@ let myMapControl = L.control.layers({
     "Orthophoto 30cm" : myLayers.bmaporthofoto30cm,
 },{
     "B Map Overlay" : myLayers.bmapoverlay,
-    "Wetterstationen": awsGroup,
+    "Stationen": wienGroup,
 });
 
 myMap.addControl(myMapControl)
 myMap.setView([47.267,11.383], 11);
 
-console.log("Stationen: ", stationen);
+console.log("Stationen: ", wienstation);
 
-let geojson = L.geoJSON(stationen).addTo(awsGroup);
+let geojson = L.geoJSON(wienstation).addTo(wienGroup);
 geojson.bindPopup(function(layer){
     const props = layer.feature.properties
-    const popupText = `<h1>${props.name}</h1>
-    <p>Temperatur: ${props.LT} °C</p>`;
+    const popupText = `<h1>${props.NAME}</h1>
+    <p>Adresse: ${props.ADRESSE}</p>`;
     return popupText;
 });
 
-myMap.fitBounds(awsGroup.getBounds());
+myMap.fitBounds(wienGroup.getBounds());
