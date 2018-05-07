@@ -2,9 +2,7 @@
 
 let myMap = L.map("mapdiv");
 const bikeGroup = L.featureGroup().addTo(myMap);
-var myIcon = L.icon({
-    iconUrl: 'skilifting.png',
-});
+
 let myLayers = {
     
     openstreetmap : L.tileLayer (
@@ -56,25 +54,26 @@ let myMapControl = L.control.layers({
     "Orthophoto 30cm" : myLayers.bmaporthofoto30cm,
 },{
     "B Map Overlay" : myLayers.bmapoverlay,
-    "Stationen": bikedata,
+    "Stationen": bikeGroup,
 });
 
 myMap.addControl(myMapControl)
 myMap.setView([47.267,11.383], 11);
 
 
-async function addGeojson(url1){
-    console.log("URL wird geladen:", url1);
-    const response = await fetch(url1);
-    console.log("Response:", response1);
-    const wienjson1 = await response1.json();
+
+async function addGeojson(url){
+    console.log("URL wird geladen:", url);
+    const response = await fetch(url);
+    console.log("Response:", response);
+    const wienjson1 = await response.json();
     console.log("GeoJSON:",wienjson1);
     const geojson1 = L.geoJSON(wienjson1, {
         style: function(feature){
             return {color: "#ff8452"};
         },
         pointToLayer: function(geoJSONPoint, latlng){
-            return L.marker(latlng, {icon: myIcon});
+            return L.marker(latlng);
         }
     });
     bikeGroup.addLayer(geojson1);
@@ -82,9 +81,9 @@ async function addGeojson(url1){
 }
 
 
-const url1 = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:CITYBIKEOGD&srsName=EPSG:4326&outputFormat=json"
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:CITYBIKEOGD&srsName=EPSG:4326&outputFormat=json"
 
-addGeojson(url1);
+addGeojson(url);
 myMap.addLayer(bikeGroup);
 
 ;
