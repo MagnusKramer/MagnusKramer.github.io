@@ -63,7 +63,7 @@ myMap.setView([47.267,11.383], 11);
 
 
 async function addGeojson(url){
-    console.log("URL wird geladen:", url);
+    console.log("URL wird jetzt geladen:", url);
     const response = await fetch(url);
     console.log("Response:", response);
     const wienjson2 = await response.json();
