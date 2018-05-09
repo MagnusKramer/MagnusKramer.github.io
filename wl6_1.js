@@ -1,7 +1,7 @@
 
 
 let myMap = L.map("mapdiv");
-const bikeGroup = L.featureGroup().addTo(myMap);
+const bikeGroup = L.markerClusterGroup().addTo(myMap);
 
 let myLayers = {
     
@@ -76,6 +76,7 @@ async function addGeojson(url){
             return L.marker(latlng);
         }
     });
+    const hash = new L.Hash(myMap)
     bikeGroup.addLayer(geojson1);
     myMap.fitBounds(bikeGroup.getBounds())
 }
