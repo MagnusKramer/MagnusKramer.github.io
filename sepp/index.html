@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bike Trail Tirol - Etappe 18: Mayrhofen - Lanersbach</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <link rel="stylesheet" href="../js/leaflet/leaflet.css" />
+    <script src="../js/leaflet/leaflet.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="data/etappe18.geojson.js"></script>
+
+    <script defer src="biketirol.js"></script>
+
+</head>
+
+<body>
+    <div id="header">
+        <h2 class="white">Bike Trail Tirol</h2>
+        <h3 class="white">Gute Fahrt!</h3>
+    </div>
+
+    <div class="author">
+        <img src="images/user.jpg" alt="Ihr Reiseleiter" />
+        <p class="gray">
+            <a href="mailto:magnus.kramer@student.uibk.ac.at">Magnus Kramer</a>
+            <a href="https://github.com/MagnusKramer/biketrail/index.html">https://github.com/MagnusKramer/biketrail/</a>
+        </p>
+    </div>
+
+    <hr />
+
+    
+    <div class="article">
+        <h1>Etappe 18 von Mayrhofen nach Lanserbach</h1>
+
+        <p>Die als mittelschwierig eingestufte Bike Trail Tirol Etappe führt von Mayrhofen in den hintersten Teil des Zillertals nach Lanersbach. Auf asphaltierten Wegen und gut ausgebauten Forststraßen sind auf einer Streckenlänge von 15 Kilometern 900 Höhenmeter zu bewältigen. Am Ziel, auf 1.280 Metern Seehöhe, wartet das Traumpanorama der Tuxer Alpen.</p>
+
+        <!--TODO: Karte mit Radroute und Marker beim Start- und Endpunkt. Hintergrundkarte OSM, basemap.at und Elektronische Karte Tirol (Sommer, Winter, Orthophoto jeweils mit Beschriftung) - siehe biketirol.js-->
+        <div id="map"></div>
+
+        <h2>Streckenbeschreibung</h2>
+        <p>Vom Musikpavillon in Mayrhofen fährt man rund 100 Meter in westlicher Richtung und zweigt dann links ab in die Hauptstraße des Zentrums. Nach etwa einem halben Kilometer überquert man den Bach und fährt halbrechts in die Tuxerstraße bis zur Bundesstraße. Nun folgt man den Straßenschildern Richtung Ginzling, bis rechts ein schmaler Asphaltweg nach „Finkenberg Tux“ abzweigt. Auf diesem geht es nun aufwärts bis nach Finkenberg, bis man wieder die Hauptstraße nach Tux erreicht. Auf dieser geht es in zwei Kehren bergwärts ehe man rechts Richtung Astegg abzweigt. Die Strecke führt nun einen knappen Kilometer ansteigend aber talauswärts bis zur Pension Gletscherblick, wo man scharf links („Mittelstation“) abzweigt. In weiterer Folge hält man sich an die Wegweiser „Lanersbach“. Es geht ansteigend bis auf 1.500 Metern Seehöhe (kurze Schiebestrecke durch die Wiesen, 28a) und danach auf Forststraßen abwärts bis nach Vorderlanersbach.</p>
+
+        <h3>Links</h3>
+        <ul>
+            <li><a target=_blank href="https://www.tirol.at/reisefuehrer/sport/radfahren/biketouren/a-bike-trail-tirol-mayrhofen-lanersbach"> Tirol.at Tourenbeschreibung</a></li>
+            <li><a target=_blank href="http://www.greenroom.at"> E-Bike-Vermietung Mayrhofen</a></li>
+            <li><a target=_blank href="https://www.bergfex.at/mayrhofen/wetter/"> Wetter Mayrhofengas</a></li>
+            <li><a target=_blank href="https://www.bergfriedalm.at"> Gasthaus Lanersbach</a></li>
+        </ul>
+    </div>
+
+    <hr />
+
+    
+    <div id="footer" class="gray">
+        <a class="back" href="../17/index.html"> <!--schaun ob man 17 oder 15 nimmt-->
+            <i class="fas fa-arrow-alt-circle-left"></i> vorhergehender Stop</a>
+        <a class="next" href="../19/index.html">nächster Stop
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+    </div>
+
+</body>
+</html>
