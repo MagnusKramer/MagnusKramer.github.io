@@ -88,6 +88,19 @@ async function ladeGeojsonLayer(datenAttribute) {
             layer.bindPopup(popup, {
                 maxWidth: 600,
             });
+        },
+        pointToLayer: function(geojsonPoint, latlng) {
+            if (datenAttribute.icon){
+                return L.marker(latlng, {
+                    icon: L.icon({
+                        iconUrl: datenAttribute.icon,
+                        iconAnchor: [16,32],
+                        popupAnchor: [0,-32],
+                    })
+                })
+            } else {
+                return L.marker(latlng);
+            }
         }
     });
     geojsonGruppe.addLayer(geojsonObjekt);
