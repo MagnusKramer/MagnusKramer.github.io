@@ -12,7 +12,9 @@
 */
 
 
-let myMap = L.map("map");
+var myMap = L.map("map", {
+    fullscreenControl: true,
+});
 
 let markerGroup = L.featureGroup();
 const trailGroup = L.featureGroup();
@@ -145,7 +147,6 @@ geojson.bindPopup(function(layer){
     //<p>Es geht</p>`;
     return popupText;
 });
-
 
 myMap.fitBounds(trailGroup.getBounds());
 
