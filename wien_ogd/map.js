@@ -70,7 +70,24 @@ async function ladeGeojsonLayer(url) {
     const response_json = await response.json();
 
     // GeoJSON Geometrien hinzufügen und auf Ausschnitt zoomen
-    const geojsonObjekt = L.geoJSON(response_json);
+    const geojsonObjekt = L.geoJSON(response_json, {
+        onEachFeature: function(feature, layer) {
+            //console.log (feature.properties);
+            let popup = "<h3> Attribute </h3>";
+            for (attribut in feature.properties) {
+                let wert = feature.properties[attribut];
+                if (wert && wert.toString().startsWith("http:")) {
+                    popup += `${attribut}: <a href = "${wert}">Weblink</a><br/>`;
+                } else {
+                    popup += `${attribut}: ${feature.properties[attribut]}<br/>`;
+                }
+            }
+            //console.log(popup)
+            layer.bindPopup(popup, {
+                maxWidth: 600,
+            });
+        }
+    });
     geojsonGruppe.addLayer(geojsonObjekt);
     karte.fitBounds(geojsonGruppe.getBounds());
 }
