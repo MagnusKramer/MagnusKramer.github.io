@@ -20,23 +20,23 @@ let markerGroup = L.featureGroup();
 const trailGroup = L.featureGroup();
 
 let myLayers = {
-    
-    openstreetmap : L.tileLayer (
+
+    openstreetmap: L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            subdomains : ["a","b","c"],
-            attribution : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            subdomains: ["a", "b", "c"],
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }
     ),
-    geolandbasemap : L.tileLayer (
+    geolandbasemap: L.tileLayer(
         "https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
-            subdomains : ["maps","maps1","maps2","maps3","maps4"],
-            attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
+            subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
+            attribution: "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
         }
     ),
 
-    elektro_sommer : L.tileLayer (
+    elektro_sommer: L.tileLayer(
         "https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
-            attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
+            attribution: "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
         }
     ),
     elektronische_karte_sommer: L.tileLayer(
@@ -62,45 +62,45 @@ let myLayers = {
             attribution: "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
         }
     ),
-/*    
-    bmapgrau : L.tileLayer (
-        "https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
-            subdomains : ["maps","maps1","maps2","maps3","maps4"],
-            attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
-        }
-    ),
-
-    bmaphidpi : L.tileLayer (
-        "https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
-            subdomains : ["maps","maps1","maps2","maps3","maps4"],
-            attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
-        }
-    ),
-
-    bmaporthofoto30cm : L.tileLayer (
-        "https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
-            subdomains : ["maps","maps1","maps2","maps3","maps4"],
-            attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
-        }
-    ),*/
+    /*    
+        bmapgrau : L.tileLayer (
+            "https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
+                subdomains : ["maps","maps1","maps2","maps3","maps4"],
+                attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
+            }
+        ),
+    
+        bmaphidpi : L.tileLayer (
+            "https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
+                subdomains : ["maps","maps1","maps2","maps3","maps4"],
+                attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
+            }
+        ),
+    
+        bmaporthofoto30cm : L.tileLayer (
+            "https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
+                subdomains : ["maps","maps1","maps2","maps3","maps4"],
+                attribution : "Datenquelle: <a href='https://www.basemap.at'>basemap.at</a>"
+            }
+        ),*/
 };
 
-myMap.addLayer (myLayers.elektronische_karte_sommer);
+myMap.addLayer(myLayers.elektronische_karte_sommer);
 
 let myMapControl = L.control.layers({
-    "Open Streetmap" : myLayers.openstreetmap,
-    "Geoland Basemap" : myLayers.geolandbasemap,
+    "Open Streetmap": myLayers.openstreetmap,
+    "Geoland Basemap": myLayers.geolandbasemap,
     "Sommerkarte": myLayers.elektronische_karte_sommer,
     "Winterkarte": myLayers.elektronische_karte_winter,
     "Ortho-karte": myLayers.elektronische_karte_ortho,
     /*"Map Grau" : myLayers.bmapgrau,
     "Map hochaufgeloest" : myLayers.bmaphidpi,
     "Orthophoto 30cm" : myLayers.bmaporthofoto30cm,*/
-},{
-    //"B Map Overlay" : myLayers.bmapoverlay,
-    "Wegpunkte": trailGroup, 
-    "Start/Ziel": markerGroup,
-});
+}, {
+        //"B Map Overlay" : myLayers.bmapoverlay,
+        "Wegpunkte": trailGroup,
+        "Start/Ziel": markerGroup,
+    });
 
 myMap.addLayer(markerGroup);
 const start = [47.166344, 11.864736]
@@ -127,7 +127,7 @@ endeMarker.bindPopup("<h3>Lanersbach</h3> <a href = 'https://de.wikipedia.org/wi
 
 
 myMap.addControl(myMapControl)
-myMap.setView([47.267,11.383], 11);
+myMap.setView([47.267, 11.383], 11);
 
 L.control.scale({
     maxwidth: 200,
@@ -138,9 +138,16 @@ L.control.scale({
 
 
 
-console.log("Wegpunkte: ", trailjs);
+//console.log("Wegpunkte: ", trailjs);
 
-let geojson = L.geoJSON(trailjs).addTo(trailGroup);
+let gpxTrack = new L.GPX("data/etappe18.gpx", {
+    async: true,
+}).addTo(trailGroup);
+gpxTrack.on("load", function(evt){
+    myMap.fitBounds(evt.target.getBounds());
+})
+
+/*let geojson = L.geoJSON(trailjs).addTo(trailGroup);
 geojson.bindPopup(function(layer){
     const props = layer.feature.properties
     const popupText = `<h1>Hallo</h1>
@@ -148,7 +155,8 @@ geojson.bindPopup(function(layer){
     return popupText;
 });
 
-myMap.fitBounds(trailGroup.getBounds());
+myMap.fitBounds(trailGroup.getBounds());*/
+
 
 // eine neue Leaflet Karte definieren
 
