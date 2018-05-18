@@ -145,12 +145,26 @@ let gpxTrack = new L.GPX("data/etappe18.gpx", {
 }).addTo(trailGroup);
 gpxTrack.on("loaded", function(evt){
     console.log("Distanz:", evt.target.get_distance().toFixed(0))
-    console.log("Höchster Punkt:", evt.target.get_elevation_min().toFixed(0))
+    console.log("Höchste Punkt:", evt.target.get_elevation_min().toFixed(0))
     console.log("Niedrigster Punkt: ", evt.target.get_elevation_max().toFixed(0))
     console.log("Höhenmeter (Anstieg):", evt.target.get_elevation_gain().toFixed(0))
     console.log("Höhenmeter (Abstieg):", evt.target.get_elevation_loss().toFixed(0))
+
     let laenge = evt.target.get_distance().toFixed(0)
     document.getElementById("laenge").innerHTML=laenge;
+
+    let punkt_hoch = evt.target.get_elevation_min().toFixed(0)
+    document.getElementById("punkt_hoch").innerHTML=punkt_hoch;
+
+    let punkt_tief = evt.target.get_elevation_max().toFixed(0)
+    document.getElementById("punkt_tief").innerHTML=punkt_tief;
+
+    let anstieg = evt.target.get_elevation_gain().toFixed(0)
+    document.getElementById("anstieg").innerHTML=anstieg;
+
+    let abstieg = evt.target.get_elevation_loss().toFixed(0)
+    document.getElementById("abstieg").innerHTML=abstieg;
+
     myMap.fitBounds(evt.target.getBounds());
 })
 
