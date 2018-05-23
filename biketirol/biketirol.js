@@ -18,6 +18,7 @@ var myMap = L.map("map", {
 
 let markerGroup = L.featureGroup();
 const trailGroup = L.featureGroup();
+let eleGroup =L.featureGroup();
 
 let myLayers = {
 
@@ -100,6 +101,7 @@ let myMapControl = L.control.layers({
         //"B Map Overlay" : myLayers.bmapoverlay,
         "Wegpunkte": trailGroup,
         "Start/Ziel": markerGroup,
+        "Steigungslinie": eleGroup,
     });
 
 //myMap.addLayer(markerGroup);
@@ -138,6 +140,13 @@ L.control.scale({
 
 
 
+//Höhenprofil einspeisen über leaflet.elevation plugin (23.05)
+let hoehenprofil = L.control.elevation({
+    position: "topright",
+    theme: "steelblue-theme",
+    collapsed: false,
+}).addTo(myMap);
+
 //console.log("Wegpunkte: ", trailjs);
 
 let gpxTrack = new L.GPX("data/etappe18.gpx", {
@@ -168,6 +177,53 @@ gpxTrack.on("loaded", function(evt){
     myMap.fitBounds(evt.target.getBounds());
 })
 
+
+
+gpxTrack.on("addline",function(evt){
+    hoehenprofil.addData(evt.line);
+    console.log(evt.line);
+    console.log(evt.line.getLatLngs());
+    console.log(evt.line.getLatLngs()[0].meta);
+    console.log(evt.line.getLatLngs()[0].lat);
+    console.log(evt.line.getLatLngs()[0].lng);
+    console.log(evt.line.getLatLngs()[0].meta.ele);
+
+
+    let gpxLinie = evt.line.getLatLngs();
+    for (i=1; i<gpxLinie.length; i++) {
+        let p1= gpxLinie[i-1];
+        let p2= gpxLinie[i];
+
+        let dist = myMap.distance(
+            [p1.lat, p1.lng],
+            [p2.lat, p2.lng],
+        );
+
+
+        //Höhenunterschied berechnen
+        let delta = p2.meta.ele - p1.meta.ele;
+
+
+        //Steigung in %
+        let proz = delta/dist*100.0;
+
+        console.log(p1.lat, p1.lng, p2.lat, p2.lng, dist,delta,proz);
+
+
+        let segment = L.polyline(
+            [
+                [p1.lat, p1.lng],
+                [p2.lat, p2.lng],
+                
+            ], {
+                color: 'red'
+            }
+        ).addTo(eleGroup);
+    }
+});
+
+
+
 /*let geojson = L.geoJSON(trailjs).addTo(trailGroup);
 geojson.bindPopup(function(layer){
     const props = layer.feature.properties
@@ -175,6 +231,8 @@ geojson.bindPopup(function(layer){
     //<p>Es geht</p>`;
     return popupText;
 });
+
+
 
 myMap.fitBounds(trailGroup.getBounds());*/
 
