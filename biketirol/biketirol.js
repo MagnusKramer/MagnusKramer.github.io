@@ -16,9 +16,9 @@ var myMap = L.map("map", {
     fullscreenControl: true,
 });
 
-let markerGroup = L.featureGroup();
+let markerGroup = L.featureGroup().addTo(myMap);
 const trailGroup = L.featureGroup();
-let eleGroup =L.featureGroup();
+let eleGroup =L.featureGroup().addTo(myMap);
 
 let myLayers = {
 
@@ -205,18 +205,27 @@ gpxTrack.on("addline",function(evt){
 
 
         //Steigung in %
-        let proz = delta/dist*100.0;
+        let proz = (dist>0) ? (delta/dist*100.0).toFixed(2): 0
 
         console.log(p1.lat, p1.lng, p2.lat, p2.lng, dist,delta,proz);
 
+        let farbe = 
+            proz > 10   ? "#cb181d" :
+            proz > 6    ? "#fb6a4a" :
+            proz > 2    ? "#fcae91" :
+            proz > 0    ? "#fee5d9" :
+            proz > -2   ? "#edf8e9" :
+            proz > -6   ? "#bae4b3" :
+            proz > -10  ? "#bae4b3" : 
+                          "#bae4b3";
 
         let segment = L.polyline(
             [
                 [p1.lat, p1.lng],
                 [p2.lat, p2.lng],
-                
             ], {
-                color: 'red'
+                color: farbe,
+                weight: 5,
             }
         ).addTo(eleGroup);
     }
